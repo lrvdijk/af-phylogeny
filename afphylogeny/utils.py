@@ -1,5 +1,5 @@
-import fileinput
 from itertools import islice
+
 
 def sliding_window(seq, n=3):
     """Returns an iterator for a sliding window over a given sequence.
@@ -15,12 +15,10 @@ def sliding_window(seq, n=3):
 
     Example
     -------
-
     s -> (s0, s1, ..., sn-1), (s1, s2, sn)
 
     Notes
     -----
-
     See also this stackoverflow function:
     https://stackoverflow.com/questions/6822725/rolling-or-sliding-window-iterator-in-python
     """
@@ -34,4 +32,3 @@ def sliding_window(seq, n=3):
     for elem in it:
         result = result[1:] + (elem,)
         yield result
-

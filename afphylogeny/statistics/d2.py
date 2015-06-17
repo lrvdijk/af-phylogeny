@@ -1,10 +1,8 @@
 import math
 from collections import defaultdict
 
-from afphylogeny.utils import sliding_window
 
-
-def d2(seq1, seq2):
+def d2(seq1_iter, seq2_iter):
     """Compute D2 score for given sequences `seq1` and `seq2`.
 
     Parameters
@@ -12,7 +10,7 @@ def d2(seq1, seq2):
     seq1_iter : iterator yielding each word
         This parameter should be an iterator returning each k-length word in
         the first sequence.
-    seq2 : string
+    seq2_iter : string
         This parameter should be an iterator returning each k-length word in
         the second sequence.
 
@@ -37,10 +35,10 @@ def d2(seq1, seq2):
     word_count1 = defaultdict(int)
     word_count2 = defaultdict(int)
 
-    for word in sliding_window(seq1):
+    for word in seq1_iter:
         word_count1[word] += 1
 
-    for word in sliding_window(seq2):
+    for word in seq2_iter:
         word_count2[word] += 1
 
     return sum([word_count1[word] * word_count2[word] for word in word_count1])

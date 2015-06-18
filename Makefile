@@ -16,6 +16,7 @@ trees: $(MAFFT_TREES) $(AF_TREES)
 	
 data/mafft/%.fasta.tree: data/sequences/%.fasta
 	mafft-linsi --treeout --thread -1 $< > $@
+	mv $(addsuffix .tree, $<) $@
 
 data/af/%.fasta.tree: data/sequences/%.fasta
 	@echo 'python af-tree-construction.py $< $@'

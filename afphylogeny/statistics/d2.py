@@ -100,5 +100,6 @@ class D2Neighbourhood:
             word_count1[word] * word_count2[word] for word in word_count1
         ])
 
+
 d2_neighbourhood_dna = D2Neighbourhood()
 d2_neighbourhood_rna = D2Neighbourhood("ACUG")

@@ -1,4 +1,4 @@
-# Variable to be used for substiturion
+# Variable to be used for substitution
 empty:=
 
 # Collect all the sequence files
@@ -12,14 +12,16 @@ AF_TREES = $(addprefix data/af/, $(addsuffix .tree, $(SEQUENCES)))
 
 all: trees
 
-trees: $(MAFFT_TREES) $(AF_TREES)
+mafft: $(MAFFT_TREES)
+af: $(AF_TREES)
+trees: mafft af
 	
 data/mafft/%.fasta.tree: data/sequences/%.fasta
 	mafft-linsi --treeout --thread -1 $< > $@
 	mv $(addsuffix .tree, $<) $@
 
 data/af/%.fasta.tree: data/sequences/%.fasta
-	@echo 'python af-tree-construction.py $< $@'
+	python af-phylogeny.py -l WARNING $< $@
 
 print-%:
 	@echo '$*=$($*)'
@@ -31,4 +33,4 @@ clean:
 	rm -f $(MAFFT_TREES)
 	rm -f $(AF_TREES)
 
-.PHONY: all distances trees clean
+.PHONY: all mafft af trees clean

@@ -18,7 +18,8 @@ trees: mafft af
 	
 data/mafft/%.fasta.tree: data/sequences/%.fasta
 	mafft-linsi --treeout --thread -1 $< > $@
-	mv $(addsuffix .tree, $<) $@
+	python mafft-tree-fixer.py $(addsuffix .tree, $<) $@
+	rm $(addsuffix .tree, $<)
 
 data/af/%.fasta.tree: data/sequences/%.fasta
 	python af-phylogeny.py -l WARNING $< $@

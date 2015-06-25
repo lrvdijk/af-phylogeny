@@ -80,10 +80,11 @@ if __name__ == '__main__':
                 logger.exception(e)
                 continue
 
-            rf = tree1.compare_rfd(tree2)
+            rf = tree1.unrooted_copy().compare_rfd(tree2.unrooted_copy(),
+                                                   proportion=True)
 
             outfile = os.path.join(
-                output_dir, file1[:-4] + "evaluation")
+                output_dir, tree.name[:-4] + "evaluation")
 
             with open(outfile, 'w') as ofile:
                 ofile.write(
@@ -91,7 +92,7 @@ if __name__ == '__main__':
                     "------\n\n"
                 )
                 ofile.write(file1 + "\n")
-                ofile.write(tree1.ascii_art())
+                ofile.write(tree1.unrooted_copy().ascii_art())
                 ofile.write("\n\n")
 
                 ofile.write(
@@ -99,7 +100,7 @@ if __name__ == '__main__':
                     "------\n\n"
                 )
                 ofile.write(file2 + "\n")
-                ofile.write(tree2.ascii_art())
+                ofile.write(tree2.unrooted_copy().ascii_art())
                 ofile.write("\n\n")
                 ofile.write("Robinson-Foulds: {}".format(rf))
 

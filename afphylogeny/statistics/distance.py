@@ -1,6 +1,5 @@
 import itertools
 import logging
-import math
 import multiprocessing as mp
 
 import numpy as np
@@ -15,7 +14,6 @@ def calculate_distance(seq1, seq2, distance_func, args, kwargs):
                 seq1.metadata['id'], seq2.metadata['id'])
 
     dist = distance_func(seq1, seq2, *args, **kwargs)
-    dist = abs(math.log(dist / 0.00001))
 
     logger.debug('Distance between %s and %s is %.2f', seq1.metadata['id'],
                  seq2.metadata['id'], dist)
@@ -24,7 +22,7 @@ def calculate_distance(seq1, seq2, distance_func, args, kwargs):
 
 
 def calculate_distance_kwargs(kwargs):
-    calculate_distance(**kwargs)
+    return calculate_distance(**kwargs)
 
 
 def create_distance_matrix(sequences, distance_func, pool=1, *args, **kwargs):

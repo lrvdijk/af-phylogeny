@@ -224,6 +224,7 @@ To enable multicore support in Make, use the `-j` command line option:
 
 This runs four builds in parallel. 
 
+[d2]: http://www.nature.com/srep/2014/140930/srep06504/full/srep06504.html
 [scikit-bio]: http://scikit-bio.org
 [skbio-io]: http://scikit-bio.org/docs/latest/io.html#supported-file-formats
 [mafft]: http://mafft.cbrc.jp/alignment/software/

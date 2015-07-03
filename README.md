@@ -12,9 +12,6 @@ Dependencies
 ------------
 
 * Python 3.4+
-* Numpy
-* Scipy
-* pandas
 * Custom fork of [scikit-bio][].
 
 This program has only been tested under Linux.
@@ -30,10 +27,12 @@ virtual environment.
     $ cd af-phylogeny
     $ source bin/activate
 
-Now you're inside your activated Python virtual environment. Install the 
-dependencies for this package using Pip, this also automatically downloads the 
-required [scikit-bio][] branch.
+Now you're inside your activated Python virtual environment. Clone the 
+repository and  install the dependencies for this package using Pip, this also 
+automatically downloads the required [scikit-bio][] branch.
 
+    $ git clone https://github.com/sh4wn/af-phylogeny
+    $ cd af-phylogeny
     $ pip install -r requirements.txt
 
 Usage

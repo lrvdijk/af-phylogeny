@@ -1,1 +1,1 @@
--e git+https://github.com/sh4wn/scikit-bio.git@phylip-reader
+-e git+https://github.com/sh4wn/scikit-bio.git@phylip-reader#egg=skbio

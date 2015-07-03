@@ -44,7 +44,7 @@ def get_argument_parser():
         help="Enable multicore support. This option specifies the number of "
              "child processes to spawn. By default it automatically detects "
              "the number of cpu cores and enables multicore support when there"
-             " are more than 8 sequences in the file to analyze."
+             " are more than 16 sequences in the file to analyze."
     )
 
     log_choices = ["DEBUG", "INFO", "WARNING", "ERROR", "CRITICAL"]
@@ -64,7 +64,7 @@ if __name__ == '__main__':
 
     sequences = SequenceCollection.read(args.infile, format=args.format)
 
-    if args.parallel == 0 and len(sequences) > 8:
+    if args.parallel == 0 and len(sequences) > 16:
         pool_size = multiprocessing.cpu_count()
     else:
         pool_size = 1

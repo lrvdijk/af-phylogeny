@@ -39,10 +39,17 @@ def d2(seq1_iter, seq2_iter):
     word_count1 = Counter(seq1_iter)
     word_count2 = Counter(seq2_iter)
 
+    self_matching1 = sum(x**2 for x in word_count1.values())
+    self_matching2 = sum(x**2 for x in word_count2.values())
+
     logger.debug('%s', str(word_count1))
     logger.debug('%s', str(word_count2))
 
-    return sum(word_count1[word] * word_count2[word] for word in word_count1)
+    return abs(math.log(
+        sum(
+            word_count1[word] * word_count2[word] for word in word_count1
+        ) / math.sqrt(self_matching1 * self_matching2)
+    ))
 
 
 class D2Normalised:
@@ -64,6 +71,8 @@ class D2Normalised:
         m = len(word_count2)
 
         score = 0.0
+        self_matching1 = 0
+        self_matching2 = 0
 
         for word in word_count1:
             normalised1 = word_count1[word] - (n * self.probs1[word])
@@ -73,7 +82,20 @@ class D2Normalised:
                 normalised1**2 + normalised2**2
             )
 
-        return score
+            self_matching1 += (normalised1 * normalised1) / math.sqrt(
+                normalised1**2 + normalised1**2
+            )
+
+        for word in word_count2:
+            normalised2 = word_count2[word] - (m * self.probs2[word])
+
+            self_matching2 += (normalised2 * normalised2) / math.sqrt(
+                normalised2**2 + normalised2**2
+            )
+
+        return abs(math.log(
+            score / math.sqrt(self_matching1 * self_matching2)
+        ))
 
 
 class D2Neighbourhood:
@@ -101,9 +123,14 @@ class D2Neighbourhood:
         logger.debug('Word count 1: %s', str(word_count1))
         logger.debug('Word count 2: %s', str(word_count2))
 
-        return sum(
-            word_count1[word] * word_count2[word] for word in word_count1
-        )
+        self_matching1 = sum(x**2 for x in word_count1.values())
+        self_matching2 = sum(x**2 for x in word_count2.values())
+
+        return abs(math.log(
+            sum(
+                word_count1[word] * word_count2[word] for word in word_count1
+            ) / math.sqrt(self_matching1 * self_matching2)
+        ))
 
 
 d2_neighbourhood_dna = D2Neighbourhood()

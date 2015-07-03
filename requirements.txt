@@ -1,1 +1,4 @@
+numpy
+scipy
+pandas
 -e git+https://github.com/sh4wn/scikit-bio.git@phylip-reader#egg=skbio

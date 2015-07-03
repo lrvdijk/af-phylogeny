@@ -12,6 +12,9 @@ Dependencies
 ------------
 
 * Python 3.4+
+* NumPy
+* SciPy
+* Pandas
 * Custom fork of [scikit-bio][].
 
 This program has only been tested under Linux.

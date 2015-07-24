@@ -2,6 +2,8 @@ import math
 import logging
 from collections import defaultdict, Counter
 
+import numpy as np
+
 
 logger = logging.getLogger(__name__)
 
@@ -39,8 +41,8 @@ def d2(seq1_iter, seq2_iter):
     word_count1 = Counter(seq1_iter)
     word_count2 = Counter(seq2_iter)
 
-    self_matching1 = sum(x**2 for x in word_count1.values())
-    self_matching2 = sum(x**2 for x in word_count2.values())
+    self_matching1 = np.sum(np.array(word_count1.values())**2)
+    self_matching2 = np.sum(np.array(word_count2.values())**2)
 
     logger.debug('%s', str(word_count1))
     logger.debug('%s', str(word_count2))
@@ -104,10 +106,12 @@ class D2Neighbourhood:
 
     def _get_neighbourhood(self, word):
         logger.debug('Generating neighbourhood for %s', word)
-        word = str(word)
+        word = list(word)
         for i in range(len(word)):
             for letter in self.alphabet:
-                yield "".join([word[:i], letter, word[i+1:]])
+                new_word = word.copy()
+                new_word[i] = letter
+                yield "".join(new_word)
 
     def __call__(self, seq1_iter, seq2_iter):
         word_count1 = Counter(
@@ -123,8 +127,8 @@ class D2Neighbourhood:
         logger.debug('Word count 1: %s', str(word_count1))
         logger.debug('Word count 2: %s', str(word_count2))
 
-        self_matching1 = sum(x**2 for x in word_count1.values())
-        self_matching2 = sum(x**2 for x in word_count2.values())
+        self_matching1 = np.sum(np.array(list(word_count1.values()))**2)
+        self_matching2 = np.sum(np.array(list(word_count2.values()))**2)
 
         return abs(math.log(
             sum(

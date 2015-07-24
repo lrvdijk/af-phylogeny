@@ -1,0 +1,12 @@
+---
+documentclass: memoir
+classoption:
+- article
+- oneside
+title: Python program for alignment free phylogenomics
+author: Lucas van Dijk 
+date: \today
+bibliography: bibliography.bib
+csl: resources/biomed-central.csl
+...
+

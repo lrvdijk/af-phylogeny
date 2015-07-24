@@ -42,7 +42,7 @@ def create_distance_matrix(sequences, distance_func, pool=1, *args, **kwargs):
                         'kwargs': kwargs
                     } for seq1, seq2 in itertools.combinations(sequences, 2)
                 ),
-                chunksize=len(sequences) / (2 * pool),
+                chunksize=32,
             )
 
             for seq1_id, seq2_id, dist in async_iter:
